@@ -27,7 +27,7 @@ async function render(pageContext: PageContextServer) {
         <title>${title}</title>
       </head>
       <body>
-        <div id="app">${dangerouslySkipEscape(appHtml)}</div>
+        <div id="app" class="max-w-7xl mx-auto">${dangerouslySkipEscape(appHtml)}</div>
       </body>
     </html>`
 
