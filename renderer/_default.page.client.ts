@@ -1,5 +1,6 @@
 import { createApp } from './app'
 import type { PageContextClient } from './types'
+import './index.css'
 
 export { render }
 
