@@ -52,62 +52,49 @@
     </section>
   </div>
 </template>
-<script>
-export default {
-  name: "CatFacts",
+<script setup>
+import { ref, computed, onBeforeMount } from 'vue'
 
-  data() {
-    return {
-      facts: {},
-      currentPage: 1,
-      lastPage: 1,
-      loading: false,
-    };
-  },
-  computed: {
-    isPreviousDisabled() {
-      return this.currentPage === 1;
-    },
-    isNextDisabled() {
-      return this.currentPage === this.lastPage;
-    },
-  },
+const facts = ref([]),
+      currentPage = ref(1),
+      lastPage = ref(1),
+      loading = ref(false);
 
-  mounted() {
-    this.getFacts(this.currentPage);
-  },
+const isPreviousDisabled = computed(() => currentPage.value === 1);
+const isNextDisabled = computed(() => currentPage.value === lastPage.value);
 
-  methods: {
-    async getFacts() {
-      try {
-        this.loading = true;
-        const response = await fetch(
-          `https://catfact.ninja/facts?page=${this.currentPage}`,
-          {
-            method: "GET",
-          }
-        )
-        .then(response => response.json());
-        this.facts = response.data;
-        this.lastPage = response.last_page;
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
-        console.log(error);
+onBeforeMount(() => {
+  getFacts(currentPage);
+});
+
+async function getFacts() {
+  try {
+    loading.value = true;
+    const response = await fetch(
+      `https://catfact.ninja/facts?page=${currentPage.value}`,
+      {
+        method: "GET",
       }
-    },
+    )
+    .then(response => response.json());
+    facts.value = response.data;
+    lastPage.value = response.last_page;
+    loading.value = false;
+  } catch (error) {
+    loading.value = false;
+    console.log(error);
+  }
+}
 
-    loadNextPage() {
-      this.currentPage++;
-      this.getFacts();
-    },
+function loadNextPage() {
+  currentPage.value++;
+  getFacts();
+}
 
-    loadPreviousPage() {
-      this.currentPage--;
-      this.getFacts();
-    },
-  },
-};
+function loadPreviousPage() {
+  currentPage.value--;
+  getFacts();
+}
 </script>
 
 <style lang="sass" scoped>
