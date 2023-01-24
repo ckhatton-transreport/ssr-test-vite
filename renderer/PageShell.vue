@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
 import { defineAsyncComponent } from 'vue'
-import Header from '../components/Header.vue'
+import Header from './Header.vue'
 const LazyFooter = defineAsyncComponent(() =>
-  import('../components/Footer.vue')
+  import('./Footer.vue')
 )
 </script>
