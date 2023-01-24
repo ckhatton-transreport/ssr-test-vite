@@ -11,9 +11,9 @@ export default {
 </script>
 
 <script setup>
-import CatFacts from '/components/CatFacts.vue'
+import CatFacts from '/components/CatFacts.vue';
 
-import { usePageContext } from '/renderer/usePageContext'
+import { usePageContext } from '/renderer/usePageContext';
 
 const maxLength = Number(usePageContext().maxLength) || null;
 </script>

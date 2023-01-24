@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { usePageContext } from '../renderer/usePageContext'
-const pageContext = usePageContext()
+import { usePageContext } from '../renderer/usePageContext';
+const pageContext = usePageContext();
 </script>
