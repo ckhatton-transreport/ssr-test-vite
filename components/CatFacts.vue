@@ -9,6 +9,12 @@
         target="_blank"
       >https://catfact.ninja/#/Facts/getFacts</a>) via fetch.
     </p>
+    <p
+      v-if="maxLength"
+      class="my-4"
+    >
+      The facts have been limited to a fact length of {{ maxLength }}.
+    </p>
     <div class="pagination flex justify-center">
       <button
         class="previous"
@@ -31,7 +37,7 @@
     <section class="relative flex justify-center">
       <div
         :class="loading ? 'opacity-100' : 'opacity-0'"
-        class="loading absolute top-12 bg-white rounded-lg shadow-lg p-4 z-10 transition-opacity duration-300"
+        class="loading"
       >
         <span class="text-xl">Loading</span>
       </div>
@@ -52,8 +58,16 @@
     </section>
   </div>
 </template>
+
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue';
+
+const props = defineProps({
+  maxLength: {
+    type: Number,
+    default: null
+  }
+})
 
 const facts = ref([]),
       currentPage = ref(1),
@@ -70,8 +84,9 @@ onBeforeMount(() => {
 async function getFacts() {
   try {
     loading.value = true;
+    const maxLengthQuery = props.maxLength ? `max_length=${props.maxLength}&` : '';
     const response = await fetch(
-      `https://catfact.ninja/facts?page=${currentPage.value}`,
+      `https://catfact.ninja/facts?${maxLengthQuery}page=${currentPage.value}`,
       {
         method: "GET",
       }
@@ -97,7 +112,7 @@ function loadPreviousPage() {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .pagination
   button
     @apply bg-gray-300 py-2 px-4
@@ -113,4 +128,7 @@ function loadPreviousPage() {
 
   .index
     @apply flex justify-center items-center bg-gray-300 py-2 px-4
+
+.loading
+  @apply absolute top-12 bg-white rounded-lg shadow-lg p-4 z-10 transition-opacity duration-300
 </style>
