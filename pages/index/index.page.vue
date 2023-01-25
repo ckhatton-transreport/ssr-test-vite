@@ -15,7 +15,7 @@
       </BaseLink>
     </div>
 
-    <CatFacts />
+    <BaseCatFacts />
   </div>
 </template>
 
@@ -27,9 +27,9 @@ export default {
 
 <script setup>
 import BaseLink from '/components/BaseLink.vue';
-import CatFacts from '/components/CatFacts.vue';
+import BaseCatFacts from '/components/BaseCatFacts.vue';
 
-import { CatFactsStore } from '/components/CatFactsStore';
+import { CatFactsStore } from '/composables/CatFactsStore';
 
 CatFactsStore.maxLength = -1;
 </script>

@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CatFactsStore } from './CatFactsStore';
+import { CatFactsStore } from '../composables/CatFactsStore';
 
 const isPreviousDisabled = computed((): boolean => CatFactsStore.currentPage === 1);
 const isNextDisabled = computed((): boolean => CatFactsStore.currentPage === CatFactsStore.lastPage);

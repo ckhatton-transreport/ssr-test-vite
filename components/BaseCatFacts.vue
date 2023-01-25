@@ -48,7 +48,7 @@ import BaseLink from '/components/BaseLink.vue';
 import ToolPagination from '/components/ToolPagination.vue';
 
 import { onBeforeMount } from 'vue';
-import { CatFactsStore } from './CatFactsStore';
+import { CatFactsStore } from '../composables/CatFactsStore';
 
 onBeforeMount((): void => {
   CatFactsStore.getFacts();
