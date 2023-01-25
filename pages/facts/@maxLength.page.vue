@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto">
-    <CatFacts :max-length="maxLength" />
+    <CatFacts />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
 import CatFacts from '/components/CatFacts.vue';
 
 import { usePageContext } from '/renderer/usePageContext';
+import { CatFactsStore } from '/components/CatFactsStore';
 
-const maxLength = Number(usePageContext().maxLength) || null;
+CatFactsStore.maxLength = Number(usePageContext().maxLength) || -1;
 </script>

@@ -28,6 +28,10 @@ export default {
 <script setup>
 import BaseLink from '/components/BaseLink.vue';
 import CatFacts from '/components/CatFacts.vue';
+
+import { CatFactsStore } from '/components/CatFactsStore';
+
+CatFactsStore.maxLength = -1;
 </script>
 
 <style lang="sass">
